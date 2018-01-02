@@ -9,6 +9,7 @@ pipeline {
                         echo "GRADLE_HOME=${env.GRADLE_HOME}"
                         echo "PATH=${env.PATH}"
                         sh "env|sort"
+                        sh "export MY_TEST_VAR=fooooooooo"
                     }
                 }
             }
