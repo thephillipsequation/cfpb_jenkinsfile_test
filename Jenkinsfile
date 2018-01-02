@@ -9,13 +9,14 @@ pipeline {
     stages {
         stage('Original') {
             steps {
-              echo "${env.TEST_VAR}"
+              echo "Expect ORIGINAL: ${env.TEST_VAR}"
                 }
         }
         stage('Modified') {
             steps {
-                withEnv(['TEST_VAR=urmom']) {
-                    sh 'echo $TEST_VAR'
+                withEnv(['TEST_VAR=modified']) {
+                    echo "Expect modified: ${env.Test_VAR}"
+                    sh 'echo expect modified: $TEST_VAR'
                 }
             }
         }
@@ -27,16 +28,17 @@ pipeline {
                       returnStdout: true
                     )
                 }
-                echo "${TEST_VAR}"
-                echo "${env.TEST_VAR}"
-                sh 'echo $TEST_VAR'
+                echo "Expect epoch: ${TEST_VAR}"
+                echo "expect ORIGINAL: ${env.TEST_VAR}"
+                sh 'echo expect epoch: $TEST_VAR'
             }
         }
         stage('Env modification') {
             steps {
                 withEnv(["TEST_VAR=${TEST_VAR}"]) {
-                    echo "${env.TEST_VAR}"
-                    sh 'echo $TEST_VAR'
+                    echo "expect epoch ${env.TEST_VAR}"
+                    sh 'echo expect epoch: $TEST_VAR'
+                    sh 'env|sort'
                 }
             }
         }
