@@ -10,10 +10,10 @@ pipeline {
                         echo "PATH=${env.PATH}"
                         sh "env|sort"
                         sh "export MY_TEST_VAR=fooooooooo"
-                        TEST_VAR = sh (
+                        sh (
                             script: "echo 'fooooooooo'",
                             returnStdout: true
-                            )
+                        )
                         echo "${TEST_VAR}"
                     }
                 }
