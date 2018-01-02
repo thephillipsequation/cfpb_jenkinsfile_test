@@ -9,13 +9,13 @@ pipeline {
     stages {
         stage('Original') {
             steps {
-              echo $TEST_VAR
+              echo "${env.TEST_VAR}"
                 }
             }
         stage('modified') {
             steps {
                 withEnv([TEST_VAR='modified']) {
-                  sh 'echo $TEST_VAR'
+                  sh "echo ${env.TEST_VAR}"
                 }
             }
         }
