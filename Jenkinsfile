@@ -1,21 +1,21 @@
 pipeline {
     agent any
+    environment {
+      TEST_VAR = sh(
+          returnStdout: true,
+          script: "echo 'ORIGINAL'"
+          )
+    }
     stages {
-        stage('build') {
+        stage('Original') {
             steps {
-                withEnv(["GRADLE_HOME=${tool name: 'gradle4', type: 'hudson.plugins.gradle.GradleInstallation'}"]) {
-                    withEnv(["PATH=${env.PATH}:${env.GRADLE_HOME}/bin"]) {
-                        // Checking the env
-                        echo "GRADLE_HOME=${env.GRADLE_HOME}"
-                        echo "PATH=${env.PATH}"
-                        sh "env|sort"
-                        sh "export MY_TEST_VAR=fooooooooo"
-                        sh (
-                            script: "echo 'fooooooooo'",
-                            returnStdout: true
-                        )
-                        echo "${TEST_VAR}"
-                    }
+              echo $TEST_VAR
+                }
+            }
+        stage('modified') {
+            steps {
+                withEnv([TEST_VAR='modified']) {
+                  sh 'echo $TEST_VAR'
                 }
             }
         }
