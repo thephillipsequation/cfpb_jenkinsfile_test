@@ -8,7 +8,6 @@ pipeline {
                         // Checking the env
                         echo "GRADLE_HOME=${env.GRADLE_HOME}"
                         echo "PATH=${env.PATH}"
-                        sh "gradle ${params.GRADLE_TASKS_OPTIONS}"
                         sh "env|sort"
                     }
                 }
