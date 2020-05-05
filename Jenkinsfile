@@ -38,6 +38,7 @@ pipeline {
                 withEnv(["TEST_VAR=${TEST_VAR}"]) {
                     echo "expect epoch ${env.TEST_VAR}"
                     sh 'echo expect epoch: $TEST_VAR'
+                    sh 'echo PR'
                     sh 'env|sort'
                 }
             }
