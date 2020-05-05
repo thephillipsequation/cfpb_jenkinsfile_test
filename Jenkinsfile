@@ -11,18 +11,17 @@ pipeline {
             steps {
                 script {
                     PR = sh(
-                            script: "curl https://api.github.com/repos/muchniki/cfpb_jenkinsfile_test/pulls/${env.CHANGE_ID}",
+                          script: "curl https://api.github.com/repos/imuchnik/cfpb_jenkinsfile_test/pulls/${env.CHANGE_ID} | jq .state",
                             returnStdout: true
                     )
                 }
-              echo "Expect ORIGINAL: ${env.TEST_VAR}"
               sh "echo the PR is ${PR}"
                 }
         }
         stage('Env modification') {
             steps {
                 withEnv(["TEST_VAR=${TEST_VAR}"]) {
-                    sh 'echo PR'
+                    sh 'echo PR status is $PR'
                     sh 'env|sort'
                 }
             }
