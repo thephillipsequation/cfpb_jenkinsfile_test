@@ -1,4 +1,3 @@
-@Library('prUtils')
 import groovy.json.JsonSlurper
 
 def findClosedPrs(prs) {
